@@ -58,19 +58,19 @@ class Validator {
      */
     private static function validateField(&$value, $rules,  $key='') {
         foreach($rules as $key=>$rule) {
-			try {
-				$validator_method =  $key . 'Validate';
-				if(method_exists('Validator',$validator_method)) {
-					self::$validator_method($rule, $value, $key);
-				}
-				else {
-					throw new ValidateException("校验规则{$key}不存在");
-				}
-			}
-			catch(ValidateException $ex) {
-				$msg = isset($rule['error_msg']) ? $rule['error_msg'] : $ex->getMessage();
-				throw new ValidateException($msg);
-			}
+            try {
+            	$validator_method =  $key . 'Validate';
+            	if(method_exists('Validator',$validator_method)) {
+            		self::$validator_method($rule, $value, $key);
+            	}
+            	else {
+            		throw new ValidateException("校验规则{$key}不存在");
+            	}
+            }
+            catch(ValidateException $ex) {
+            	$msg = isset($rule['error_msg']) ? $rule['error_msg'] : $ex->getMessage();
+            	throw new ValidateException($msg);
+            }
         }
     }
 
