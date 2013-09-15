@@ -26,8 +26,18 @@ class Validator {
                     }
                     unset($rule['invalid']);
                 }
-                self::validateField($value, $rule,  $key);
-                $params[$key] = $value;
+                if(is_array($value)) {
+                    $params[$key] = array();
+                    foreach($value as $value_item) {
+                        self::validateField($value_item, $rule,  $key);
+                        $params[$key] []= $value_item;
+                    }
+                }
+                else {
+                    self::validateField($value, $rule,  $key);
+                    $params[$key] = $value;
+                }
+                
             }
             catch(ValidateException $ex) {
                 if($invalid_config) {
