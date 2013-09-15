@@ -130,7 +130,7 @@ class Validator {
      * @param string $key
      * @throws ValidateException
      */
-    public static function stringValidate($rule , $value, $key) {
+    public static function stringValidate($rule , &$value, $key) {
         $trim = isset($rule['trim']) ? $rule['trim'] : true;
         if($trim) {
             $value = trim($value);
@@ -212,7 +212,7 @@ class Validator {
      * @param string $key
      * @throws ValidateException
      */
-    public static function regexpValidate($rule , $value,  $key) {
+    public static function regexpValidate($rule , &$value,  $key) {
         $trim = isset($rule['trim']) ? $rule['trim'] : true;
         if($trim) {
             $value = trim($value);
